@@ -13,43 +13,53 @@ export default function AllCourses() {
         All Courses {courseData.courses.length}
       </h1>
 
-      <div className="flex flex-wrap justify-center"></div>
-      <CardContainer className="inter-var">
-        <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-          {courseData.courses.map((course, index) => (
-            <CardItem
-              key={index}
-              className="flex flex-col gap-4 dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border"
-            >
-              <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-                  {course.title}
-                </h1>
-                <div className="flex items-center gap-2">
-                  <Link href={`/courses/${course.slug}`}>
-                    <a className="text-gray-800 dark:text-white">View</a>
-                  </Link>
-                </div>
+      <div className="flex flex-wrap justify-center">
+        {courseData.courses.map((course) => (
+          <CardContainer key={course.slug} className="inter-var m-4">
+            <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
+              <CardItem
+                translateZ="50"
+                className="text-xl font-bold text-neutral-600 dark:text-white"
+              >
+                {course.title}
+              </CardItem>
+              <CardItem
+                as="p"
+                translateZ="60"
+                className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+              >
+                {course.description}
+              </CardItem>
+              <CardItem translateZ="100" className="w-full mt-4">
+                <Image
+                  src={course.image}
+                  alt={course.title}
+                  height={1000}
+                  width={1000}
+                  className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                />
+              </CardItem>
+              <div className="flex justify-between items-center mt-20">
+                <CardItem
+                  translateZ={20}
+                  as={Link}
+                  href={`/courses/${course.slug}`}
+                  className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+                >
+                  Try now →
+                </CardItem>
+                <CardItem
+                  translateZ={20}
+                  as="button"
+                  className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+                >
+                  Sign up
+                </CardItem>
               </div>
-              <div className="flex gap-4">
-                <div className="w-1/2">
-                  <Image
-                    src={course.image}
-                    alt={course.title}
-                    width={400}
-                    height={300}
-                  />
-                </div>
-                <div className="w-1/2">
-                  <p className="text-gray-800 dark:text-white">
-                    {course.description}
-                  </p>
-                </div>
-              </div>
-            </CardItem>
-          ))}
-        </CardBody>
-      </CardContainer>
+            </CardBody>
+          </CardContainer>
+        ))}
+      </div>
     </div>
   );
 }
